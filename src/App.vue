@@ -3,8 +3,8 @@ import ProductsGrid from './components/ProductsGrid.vue'
 </script>
 
 <template>
-  <main class="w-full">
-    <ProductsGrid class="m-4"/>
+  <main class="w-full bg-muted/50">
+    <ProductsGrid class="p-40"/>
   </main>
 </template>
 

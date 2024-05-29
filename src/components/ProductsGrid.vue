@@ -1,17 +1,20 @@
 <template>
-    <div v-if="data.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+    <div v-if="data.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card v-for="item in data" :key="item.id">
-            <CardHeader>
-                <img :src="item.src" class="w-100 border rounded">
+            <CardHeader class="px-0 pt-0">
+                <img :src="item.src" class="w-100 rounded-t-lg border-b">
             </CardHeader>
-            <CardContent class="padding-0">
+            <CardContent class="flex flex-col gap-4">
                 <p class="font-bold">{{ item.name }}</p>
-                <p class="text-secondary">{{ item.cost_price }}</p>
+                <div class="flex gap-2">
+                    <Badge variant="secondary" v-for="variant in item.variants" :key="variant.id">{{ variant.value }}</Badge>
+                </div>
+                
             </CardContent>
             <CardFooter>
-                <Button size="icon">
-                    <Plus></Plus>
-                </Button>
+                <div>
+                    <Badge variant="outline" v-for="category in item.categories" :key="category.id">{{ category.name }}</Badge>
+                </div>
             </CardFooter>
         </Card>
     </div>
@@ -23,6 +26,7 @@
 <script>
 import axios from 'axios';
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
     Card,
     CardContent,
@@ -42,7 +46,8 @@ export default {
         CardHeader,
         CardTitle,
         Button,
-        Plus
+        Badge,
+        Plus,
     },
     data() {
         return {
